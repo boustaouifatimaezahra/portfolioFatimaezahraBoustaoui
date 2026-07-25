@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
 import SectionHeading from './SectionHeading'
+import ContactForm from './ContactForm'
 import { profile, getGmailComposeUrl } from '../data/cv'
 
 const gmailUrl = getGmailComposeUrl({
@@ -63,7 +64,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="inline-block rounded-full bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition hover:scale-105"
             >
-              Envoyer un email
+              Ouvrir Gmail
             </a>
             <a
               href={`mailto:${profile.email}`}
@@ -73,6 +74,11 @@ export default function Contact() {
             </a>
           </div>
         </motion.div>
+
+        <p className="mt-12 text-center text-sm text-slate-500">
+          Ou envoyez-moi directement un message ci-dessous
+        </p>
+        <ContactForm />
       </div>
     </section>
   )
