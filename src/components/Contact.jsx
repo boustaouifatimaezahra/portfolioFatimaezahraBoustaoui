@@ -1,10 +1,15 @@
 import { motion } from 'framer-motion'
 import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
 import SectionHeading from './SectionHeading'
-import { profile } from '../data/cv'
+import { profile, getGmailComposeUrl } from '../data/cv'
+
+const gmailUrl = getGmailComposeUrl({
+  subject: 'Contact depuis votre portfolio',
+  body: 'Bonjour Fatima Ezahra,\n\n',
+})
 
 const info = [
-  { icon: FiMail, label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
+  { icon: FiMail, label: 'Email', value: profile.email, href: gmailUrl, external: true },
   { icon: FiPhone, label: 'Téléphone', value: profile.phone, href: `tel:${profile.phone}` },
   { icon: FiMapPin, label: 'Localisation', value: profile.location, href: null },
 ]
@@ -27,7 +32,7 @@ export default function Contact() {
           className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm sm:p-10"
         >
           <div className="grid gap-6 sm:grid-cols-3">
-            {info.map(({ icon: Icon, label, value, href }) => {
+            {info.map(({ icon: Icon, label, value, href, external }) => {
               const content = (
                 <div className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.02] px-4 py-6 text-center transition hover:border-fuchsia-400/40 hover:bg-white/5">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500/20 to-indigo-500/20 text-fuchsia-300">
@@ -38,7 +43,11 @@ export default function Contact() {
                 </div>
               )
               return href ? (
-                <a key={label} href={href}>
+                <a
+                  key={label}
+                  href={href}
+                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
                   {content}
                 </a>
               ) : (
@@ -47,12 +56,20 @@ export default function Contact() {
             })}
           </div>
 
-          <div className="mt-8 text-center">
+          <div className="mt-8 flex flex-col items-center gap-3">
             <a
-              href={`mailto:${profile.email}`}
+              href={gmailUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block rounded-full bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition hover:scale-105"
             >
               Envoyer un email
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              className="text-xs text-slate-500 underline-offset-2 hover:text-slate-300 hover:underline"
+            >
+              Ou ouvrir avec mon client mail par défaut
             </a>
           </div>
         </motion.div>

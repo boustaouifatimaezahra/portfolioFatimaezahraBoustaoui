@@ -8,6 +8,20 @@ export const profile = {
   languages: ['Arabe', 'Anglais', 'Français'],
 }
 
+export function getGmailComposeUrl({
+  subject = 'Contact depuis le portfolio',
+  body = '',
+} = {}) {
+  const params = new URLSearchParams({
+    view: 'cm',
+    fs: '1',
+    to: profile.email,
+    su: subject,
+    body,
+  })
+  return `https://mail.google.com/mail/?${params.toString()}`
+}
+
 export const skills = [
   {
     category: 'Langages de programmation',

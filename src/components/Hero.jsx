@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion'
 import { FiArrowDown, FiMail, FiPhone } from 'react-icons/fi'
-import { profile } from '../data/cv'
+import { profile, getGmailComposeUrl } from '../data/cv'
+
+const gmailUrl = getGmailComposeUrl({
+  subject: 'Contact depuis votre portfolio',
+  body: 'Bonjour Fatima Ezahra,\n\n',
+})
 
 const container = {
   hidden: {},
@@ -81,7 +86,12 @@ export default function Hero() {
           variants={item}
           className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400"
         >
-          <a href={`mailto:${profile.email}`} className="flex items-center gap-2 hover:text-white">
+          <a
+            href={gmailUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-white"
+          >
             <FiMail /> {profile.email}
           </a>
           <a href={`tel:${profile.phone}`} className="flex items-center gap-2 hover:text-white">
